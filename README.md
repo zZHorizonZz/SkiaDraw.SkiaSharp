@@ -8,6 +8,7 @@ own Drawables.
 ## Installation
 
 To install this library, run the following command in the Package Manager Console:
+![NuGet](https://img.shields.io/nuget/dt/SkiaDraw.SkiaSharp?color=0078d4&label=NuGet&logo=nuget&style=flat-square)
 
 ```
 nuget install SkiaDraw.SkiaSharp
@@ -33,8 +34,6 @@ builder
 
 return builder.Build();
 ```
-
-[![NuGet](https://img.shields.io/nuget/dt/SkiaDraw.SkiaSharp?color=0078d4&label=NuGet&logo=nuget&style=flat-square)]
 
 ## Examples
 
