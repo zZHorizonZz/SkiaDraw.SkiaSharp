@@ -21,7 +21,7 @@ env:
 
 jobs:
   # Library Build
-  build-android:
+  build:
     runs-on: windows-2022
     name: Library Build
     steps:
