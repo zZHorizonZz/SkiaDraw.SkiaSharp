@@ -1,4 +1,4 @@
-name: publish to nuget
+name: Publish NuGet
 on:
   workflow_dispatch:
     branches:
