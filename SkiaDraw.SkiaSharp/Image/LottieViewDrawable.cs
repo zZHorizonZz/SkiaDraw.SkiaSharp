@@ -9,7 +9,7 @@ using SkiaSharp;
 
 namespace Maui.Material.You.Components.Image;
 
-public class LottieViewDrawable : MaterialDrawable, ILottieAnimator, IDisposable
+public class LottieViewDrawable : Drawable, ILottieAnimator, IDisposable
 {
     public static readonly BindableProperty SourceProperty = LottieAnimatorElement.SourceProperty;
     public static readonly BindableProperty AnimationProgressProperty = LottieAnimatorElement.AnimationProgressProperty;

@@ -5,7 +5,7 @@ using SkiaSharp.Views.Maui.Controls;
 
 namespace Maui.Material.You.Components.Models;
 
-public interface IMaterialDrawable
+public interface IDrawable
 {
     public enum InvalidationTrigger
     {

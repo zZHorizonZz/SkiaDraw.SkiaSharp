@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui;
+﻿using Maui.Material.You.Components.Shape;
+using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 
 namespace Maui.Material.You.Components.Models;
@@ -22,8 +23,10 @@ public interface IBorder
     ///     Corner radius is used to draw border of component. Determines the radius of the border.
     /// </summary>
     CornerRadius CornerRadius { get; }
+    
+    ShapeType ShapeType { get; }
 
-    bool HasBorder { get; }
+    bool IsFilled { get; }
 
     bool HasBackground { get; }
 

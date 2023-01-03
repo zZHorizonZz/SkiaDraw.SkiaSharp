@@ -2,7 +2,7 @@
 
 namespace Maui.Material.You.Components.Internal;
 
-public abstract class VirtualDrawable<TVirtual> : MaterialDrawable where TVirtual : MaterialView
+public abstract class VirtualDrawable<TVirtual> : Drawable where TVirtual : DrawView
 {
     public VirtualDrawable(TVirtual virtualElement)
     {

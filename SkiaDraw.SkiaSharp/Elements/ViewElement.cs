@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using IView = Maui.Material.You.Components.Models.IView;
+﻿using IView = Maui.Material.You.Components.Models.IView;
 
 namespace Maui.Material.You.Components.Elements;
 

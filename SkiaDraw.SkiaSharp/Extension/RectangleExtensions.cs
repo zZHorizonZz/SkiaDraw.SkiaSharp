@@ -24,8 +24,8 @@ public static class RectangleExtensions
                point.Y >= 0 && point.Y <= rect.Height;
     }
 
-    public static bool Contains(this RectF rect, PointF[] points)
+    public static bool Contains(this RectF rect, IEnumerable<PointF> points)
     {
-        return points.Any(x => rect.Contains(x));
+        return points.Any(rect.Contains);
     }
 }

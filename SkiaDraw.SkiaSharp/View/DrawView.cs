@@ -33,7 +33,7 @@ namespace Maui.Material.You.Components.View;
 /// </code>
 ///     </example>
 /// </remarks>
-public abstract class MaterialView : ContentView, IView, IVisual
+public abstract class DrawView : Microsoft.Maui.Controls.ContentView, IView, IVisual
 {
     public new static readonly BindableProperty BackgroundColorProperty = ViewElement.BackgroundColorProperty;
     public static readonly BindableProperty RippleColorProperty = ViewElement.RippleColorProperty;
@@ -51,14 +51,14 @@ public abstract class MaterialView : ContentView, IView, IVisual
     internal SKCanvasView mCanvasView;
     internal readonly Grid mRoot;
 
-    private readonly IList<MaterialDrawable> mViewDrawable;
+    private readonly IList<Drawable> mViewDrawable;
 
     private readonly ObservableCollection<IGestureRecognizer> mGestureRecognizers = new();
     private int mTapCount;
     private long mLastTapTime;
     private long mLastPressTime;
 
-    protected MaterialView()
+    protected DrawView()
     {
         mCanvasView = new SKCanvasView { VerticalOptions = LayoutOptions.Fill, HorizontalOptions = LayoutOptions.Fill };
 
@@ -70,7 +70,7 @@ public abstract class MaterialView : ContentView, IView, IVisual
             Margin = new Thickness(0)
         };
 
-        mViewDrawable = new List<MaterialDrawable>();
+        mViewDrawable = new List<Drawable>();
         mCanvasView.EnableTouchEvents = true;
         mCanvasView.Loaded += OnLoaded;
 
@@ -295,7 +295,7 @@ public abstract class MaterialView : ContentView, IView, IVisual
         mCanvasView.Loaded += OnLoaded;
     }
 
-    public TDrawable AddDrawable<TDrawable>(TDrawable drawable) where TDrawable : MaterialDrawable
+    public TDrawable AddDrawable<TDrawable>(TDrawable drawable) where TDrawable : Drawable
     {
         drawable.InvalidationHandler += OnDrawableInvalidate;
         drawable.Parent = mCanvasView;
@@ -303,7 +303,7 @@ public abstract class MaterialView : ContentView, IView, IVisual
         return drawable;
     }
 
-    public IEnumerable<MaterialDrawable> GetDrawable(Type type)
+    public IEnumerable<Drawable> GetDrawable(Type type)
     {
         return mViewDrawable
             .Where(drawable => drawable.GetType() == type)
@@ -335,7 +335,7 @@ public abstract class MaterialView : ContentView, IView, IVisual
         ReleasedHandler?.Invoke(this, new InteractionEventArgs(point));
     }
 
-    public void RemoveDrawable(MaterialDrawable drawable)
+    public void RemoveDrawable(Drawable drawable)
     {
         drawable.InvalidationHandler -= OnDrawableInvalidate;
         drawable.Parent = null;
@@ -344,7 +344,7 @@ public abstract class MaterialView : ContentView, IView, IVisual
 
     protected static void OnVisualPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        var view = (MaterialView)bindable;
+        var view = (DrawView)bindable;
         InvalidateSurface(view.mCanvasView);
     }
 

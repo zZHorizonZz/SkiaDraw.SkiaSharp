@@ -1,5 +1,4 @@
-﻿
-using Maui.Material.You.Components.Elements;
+﻿using Maui.Material.You.Components.Elements;
 using Maui.Material.You.Components.Internal;
 using Maui.Material.You.Components.View;
 using Maui.Material.You.Utils;
@@ -9,12 +8,14 @@ using IBorder = Maui.Material.You.Components.Models.IBorder;
 
 namespace Maui.Material.You.Components.Shape;
 
-public class MaterialShapeDrawable : MaterialDrawable, IBorder
+public class ShapeDrawable : Drawable, IBorder
 {
     public static readonly BindableProperty BackgroundColorProperty = BorderElement.BackgroundColorProperty;
     public static readonly BindableProperty BorderColorProperty = BorderElement.BorderColorProperty;
     public static readonly BindableProperty BorderWidthProperty = BorderElement.BorderWidthProperty;
     public static readonly BindableProperty CornerRadiusProperty = BorderElement.CornerRadiusProperty;
+    public static readonly BindableProperty ShapeTypeProperty = BorderElement.ShapeTypeProperty;
+    public static readonly BindableProperty IsFilledProperty = BorderElement.IsFilledProperty;
 
     public Color BackgroundColor
     {
@@ -38,6 +39,18 @@ public class MaterialShapeDrawable : MaterialDrawable, IBorder
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
         set => SetValue(CornerRadiusProperty, value);
+    }
+
+    public ShapeType ShapeType
+    {
+        get => (ShapeType)GetValue(ShapeTypeProperty);
+        set => SetValue(ShapeTypeProperty, value);
+    }
+
+    public bool IsFilled
+    {
+        get => (bool)GetValue(IsFilledProperty);
+        set => SetValue(IsFilledProperty, value);
     }
 
     public bool HasBorder => BorderWidth > 0 && BorderColor != null && BorderColor.Alpha != 0;
@@ -64,7 +77,7 @@ public class MaterialShapeDrawable : MaterialDrawable, IBorder
             canvas.Restore();
         }
 
-        if (HasBackground)
+        if (HasBackground && IsFilled)
         {
             canvas.Save();
 
@@ -80,10 +93,12 @@ public class MaterialShapeDrawable : MaterialDrawable, IBorder
                     ? BorderWidth
                     : 0)));
 
+            var path = GetPath(bounds);
+            path.Transform(SKMatrix.CreateScale(context.Scale, context.Scale));
+
             canvas.Translate((GetX() + (HasBorder ? BorderWidth / 2 : 0)) * Context.Scale,
                 (GetY() + (HasBorder ? BorderWidth / 2 : 0)) * Context.Scale);
-            canvas.DrawPath(bounds.ToRoundedRect(CornerRadius, context.Scale), paint);
-
+            canvas.DrawPath(path, paint);
             canvas.Restore();
         }
 
@@ -105,9 +120,32 @@ public class MaterialShapeDrawable : MaterialDrawable, IBorder
                 (float)(Width - (GetX() + BorderWidth)),
                 (float)(Height - (GetY() + BorderWidth)));
 
+            var path = GetPath(bounds);
+            path.Transform(SKMatrix.CreateScale(context.Scale, context.Scale));
+
             canvas.Translate((GetX() + BorderWidth / 2) * context.Scale, (GetY() + BorderWidth / 2) * context.Scale);
-            canvas.DrawPath(bounds.ToRoundedRect(CornerRadius, context.Scale), paint);
+            canvas.DrawPath(path, paint);
             canvas.Restore();
         }
+    }
+
+    private SKPath GetPath(SKRect bounds)
+    {
+        var path = ShapeType switch
+        {
+            ShapeType.Rectangle => bounds.CreateRectangle(),
+            ShapeType.CutCornerRectangle => bounds.CreateCutCornerRectangle(CornerRadius),
+            ShapeType.RoundedRectangle => bounds.CreateRoundedRectangle(CornerRadius),
+            ShapeType.Circle => bounds.CreateCircle(),
+            ShapeType.Oval => bounds.CreateOval(),
+            ShapeType.Triangle => bounds.CreateTriangle(),
+            ShapeType.Diamond => bounds.CreateDiamond(),
+            ShapeType.Pentagon => bounds.CreatePentagon(),
+            ShapeType.Hexagon => bounds.CreateHexagon(),
+            ShapeType.Star => bounds.CreateStar(),
+            _ => throw new ArgumentOutOfRangeException(nameof(Shape.ShapeType))
+        };
+
+        return path;
     }
 }

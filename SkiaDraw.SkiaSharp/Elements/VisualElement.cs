@@ -1,5 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using IVisual = Maui.Material.You.Components.Models.IVisual;
+﻿using IVisual = Maui.Material.You.Components.Models.IVisual;
 
 namespace Maui.Material.You.Components.Elements;
 

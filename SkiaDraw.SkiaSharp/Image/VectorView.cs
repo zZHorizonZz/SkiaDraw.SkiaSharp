@@ -8,20 +8,20 @@ using IImage = Maui.Material.You.Components.Models.IImage;
 
 namespace Maui.Material.You.Components.Image;
 
-public class MaterialVectorView : MaterialView, IImage
+public class VectorView : DrawView, IImage
 {
     public static readonly BindableProperty ColorProperty = ImageElement.ColorProperty;
     public static readonly BindableProperty SourceProperty = ImageElement.SourceProperty;
 
     internal readonly VectorDrawable mVectorDrawable;
 
-    public MaterialVectorView()
+    public VectorView()
     {
         mVectorDrawable = AddDrawable(new VectorDrawable
             { HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Center });
 
-        HeightRequest = 128;
-        WidthRequest = 256;
+        HeightRequest = 24;
+        WidthRequest = 24;
 
         mVectorDrawable.Bind(ColorProperty, nameof(Color), source: this);
         mVectorDrawable.Bind(SourceProperty, nameof(Source), source: this);

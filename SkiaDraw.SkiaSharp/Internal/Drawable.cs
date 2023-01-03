@@ -7,29 +7,30 @@ using Microsoft.Maui.Controls;
 using SkiaSharp;
 using SkiaSharp.Views.Maui.Controls;
 using IAnimatable = Microsoft.Maui.Controls.IAnimatable;
+using IDrawable = Maui.Material.You.Components.Models.IDrawable;
 using IView = Microsoft.Maui.IView;
 using IVisual = Maui.Material.You.Components.Models.IVisual;
 
 namespace Maui.Material.You.Components.Internal;
 
-public abstract class MaterialDrawable : BindableObject, IMaterialDrawable, IVisual
+public abstract class Drawable : BindableObject, IDrawable, IVisual
 {
-    public static readonly BindableProperty XProperty = MaterialDrawableElement.XProperty;
-    public static readonly BindableProperty YProperty = MaterialDrawableElement.YProperty;
-    public static readonly BindableProperty WidthProperty = MaterialDrawableElement.WidthProperty;
-    public static readonly BindableProperty HeightProperty = MaterialDrawableElement.HeightProperty;
-    public static readonly BindableProperty TranslationXProperty = MaterialDrawableElement.TranslationXProperty;
-    public static readonly BindableProperty TranslationYProperty = MaterialDrawableElement.TranslationYProperty;
+    public static readonly BindableProperty XProperty = DrawableElement.XProperty;
+    public static readonly BindableProperty YProperty = DrawableElement.YProperty;
+    public static readonly BindableProperty WidthProperty = DrawableElement.WidthProperty;
+    public static readonly BindableProperty HeightProperty = DrawableElement.HeightProperty;
+    public static readonly BindableProperty TranslationXProperty = DrawableElement.TranslationXProperty;
+    public static readonly BindableProperty TranslationYProperty = DrawableElement.TranslationYProperty;
 
     public static readonly BindableProperty HorizontalOptionsProperty =
-        MaterialDrawableElement.HorizontalOptionsProperty;
+        DrawableElement.HorizontalOptionsProperty;
 
-    public static readonly BindableProperty VerticalOptionsProperty = MaterialDrawableElement.VerticalOptionsProperty;
-    public static readonly BindableProperty IsVisibleProperty = MaterialDrawableElement.IsVisibleProperty;
-    public static readonly BindableProperty IsEnabledProperty = MaterialDrawableElement.IsEnabledProperty;
-    public static readonly BindableProperty ZIndexProperty = MaterialDrawableElement.ZIndexProperty;
-    public static readonly BindableProperty OpacityProperty = MaterialDrawableElement.OpacityProperty;
-    public static readonly BindableProperty ParentProperty = MaterialDrawableElement.ParentProperty;
+    public static readonly BindableProperty VerticalOptionsProperty = DrawableElement.VerticalOptionsProperty;
+    public static readonly BindableProperty IsVisibleProperty = DrawableElement.IsVisibleProperty;
+    public static readonly BindableProperty IsEnabledProperty = DrawableElement.IsEnabledProperty;
+    public static readonly BindableProperty ZIndexProperty = DrawableElement.ZIndexProperty;
+    public static readonly BindableProperty OpacityProperty = DrawableElement.OpacityProperty;
+    public static readonly BindableProperty ParentProperty = DrawableElement.ParentProperty;
 
     public DrawContext Context { get; set; }
 
@@ -113,7 +114,7 @@ public abstract class MaterialDrawable : BindableObject, IMaterialDrawable, IVis
 
     public event EventHandler? InvalidationHandler;
 
-    public void OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger trigger)
+    public void OnInvalidationTriggered(IDrawable.InvalidationTrigger trigger)
     {
         InvalidationHandler?.Invoke(this, EventArgs.Empty);
     }

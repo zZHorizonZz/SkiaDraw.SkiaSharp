@@ -1,138 +1,135 @@
 ﻿using Maui.Material.You.Components.Models;
-using Maui.Material.You.Components.View;
-using Microsoft.Maui.Controls;
-using SkiaSharp.Views.Maui.Controls;
+using IDrawable = Maui.Material.You.Components.Models.IDrawable;
 
 namespace Maui.Material.You.Components.Elements;
 
-public class MaterialDrawableElement
+public class DrawableElement
 {
     public static readonly BindableProperty XProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.X),
+        nameof(IDrawable.X),
         typeof(double),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         0.0,
         propertyChanged: (bindable, oldvalue, newvalue) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.MeasureChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.MeasureChanged));
 
     public static readonly BindableProperty YProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.Y),
+        nameof(IDrawable.Y),
         typeof(double),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         0.0,
         propertyChanged: (bindable, oldvalue, newvalue) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.MeasureChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.MeasureChanged));
 
     public static readonly BindableProperty WidthProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.Width),
+        nameof(IDrawable.Width),
         typeof(double),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         -1.0,
         propertyChanged: (bindable, _, _) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.SizeChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.SizeChanged));
 
     public static readonly BindableProperty HeightProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.Height),
+        nameof(IDrawable.Height),
         typeof(double),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         -1.0,
         propertyChanged: (bindable, _, _) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.SizeChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.SizeChanged));
 
     public static readonly BindableProperty TranslationXProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.TranslationX),
+        nameof(IDrawable.TranslationX),
         typeof(double),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         0.0,
         propertyChanged: (bindable, oldvalue, newvalue) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.TranslationChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.TranslationChanged));
 
     public static readonly BindableProperty TranslationYProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.TranslationY),
+        nameof(IDrawable.TranslationY),
         typeof(double),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         0.0,
         propertyChanged: (bindable, oldvalue, newvalue) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.TranslationChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.TranslationChanged));
 
     public static readonly BindableProperty HorizontalOptionsProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.HorizontalOptions),
+        nameof(IDrawable.HorizontalOptions),
         typeof(LayoutOptions),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         LayoutOptions.Start,
         propertyChanged: (bindable, oldvalue, newvalue) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.HorizontalOptionsChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.HorizontalOptionsChanged));
 
     public static readonly BindableProperty VerticalOptionsProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.VerticalOptions),
+        nameof(IDrawable.VerticalOptions),
         typeof(LayoutOptions),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         LayoutOptions.Start,
         propertyChanged: (bindable, oldvalue, newvalue) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.VerticalOptionsChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.VerticalOptionsChanged));
 
     public static readonly BindableProperty IsVisibleProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.IsVisible),
+        nameof(IDrawable.IsVisible),
         typeof(bool),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         true,
         propertyChanged: OnVisibilityChanged);
 
     public static readonly BindableProperty IsEnabledProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.IsEnabled),
+        nameof(IDrawable.IsEnabled),
         typeof(bool),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         true,
         propertyChanged: OnEnabledChanged);
 
     public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.ZIndex),
+        nameof(IDrawable.ZIndex),
         typeof(int),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         0,
         propertyChanged: OnZIndexChanged);
 
     public static readonly BindableProperty OpacityProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.Opacity),
+        nameof(IDrawable.Opacity),
         typeof(float),
-        typeof(MaterialDrawableElement),
+        typeof(DrawableElement),
         1.0f,
         propertyChanged: (bindable, _, _) =>
-            ((IMaterialDrawable)bindable)
-            .OnInvalidationTriggered(IMaterialDrawable.InvalidationTrigger.OpacityChanged));
+            ((IDrawable)bindable)
+            .OnInvalidationTriggered(IDrawable.InvalidationTrigger.OpacityChanged));
 
     public static readonly BindableProperty ParentProperty = BindableProperty.Create(
-        nameof(IMaterialDrawable.Parent),
+        nameof(IDrawable.Parent),
         typeof(Microsoft.Maui.Controls.View),
-        typeof(MaterialDrawableElement),
-        null,
+        typeof(DrawableElement),
         propertyChanged: OnParentChanged);
 
     public static void OnVisibilityChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        ((IMaterialDrawable)bindable).OnVisibilityChanged((bool)newValue);
+        ((IDrawable)bindable).OnVisibilityChanged((bool)newValue);
     }
 
     public static void OnEnabledChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        ((IMaterialDrawable)bindable).OnEnabledChanged((bool)newValue);
+        ((IDrawable)bindable).OnEnabledChanged((bool)newValue);
     }
 
     public static void OnZIndexChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        ((IMaterialDrawable)bindable).OnZIndexChanged((int)newValue);
+        ((IDrawable)bindable).OnZIndexChanged((int)newValue);
     }
 
     public static void OnParentChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        ((IMaterialDrawable)bindable).OnParentChanged((Microsoft.Maui.Controls.View)newValue);
+        ((IDrawable)bindable).OnParentChanged((Microsoft.Maui.Controls.View)newValue);
     }
 }

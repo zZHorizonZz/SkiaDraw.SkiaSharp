@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using IImage = Maui.Material.You.Components.Models.IImage;
+﻿using IImage = Maui.Material.You.Components.Models.IImage;
 
 namespace Maui.Material.You.Components.Elements;
 
@@ -17,7 +15,6 @@ public class ImageElement
         nameof(IImage.Source),
         typeof(string),
         typeof(ImageElement),
-        null,
         propertyChanged: OnSourceChanged);
 
     public static void OnSourceChanged(BindableObject bindable, object oldValue, object newValue)

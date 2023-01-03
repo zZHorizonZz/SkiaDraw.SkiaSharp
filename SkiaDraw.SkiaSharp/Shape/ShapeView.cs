@@ -3,31 +3,40 @@ using Maui.Material.You.Components.Elements;
 using Maui.Material.You.Components.Internal;
 using Maui.Material.You.Components.Shape;
 using IBorder = Maui.Material.You.Components.Models.IBorder;
+using ShapeDrawable = Maui.Material.You.Components.Shape.ShapeDrawable;
 
 namespace Maui.Material.You.Components.View;
 
-public class MaterialRoundedView : MaterialView, IBorder
+public class ShapeView : DrawView, IBorder
 {
     public static readonly BindableProperty BorderColorProperty = BorderElement.BorderColorProperty;
     public static readonly BindableProperty BorderWidthProperty = BorderElement.BorderWidthProperty;
     public static readonly BindableProperty CornerRadiusProperty = BorderElement.CornerRadiusProperty;
+    public static readonly BindableProperty ShapeTypeProperty = BorderElement.ShapeTypeProperty;
+    public static readonly BindableProperty IsFilledProperty = BorderElement.IsFilledProperty;
 
-    internal readonly MaterialShapeDrawable mMaterialShapeDrawable;
+    internal readonly ShapeDrawable mMaterialShapeDrawable;
 
-    public MaterialRoundedView()
+    public ShapeView()
     {
-        mMaterialShapeDrawable = AddDrawable(new MaterialShapeDrawable { ZIndex = 0 });
-        mMaterialShapeDrawable.Bind(MaterialDrawable.WidthProperty, nameof(Width),
+        mMaterialShapeDrawable = AddDrawable(new ShapeDrawable { ZIndex = 0 });
+        mMaterialShapeDrawable.Bind(Drawable.WidthProperty, nameof(Width),
             source: mCanvasView, mode: BindingMode.OneWay);
-        mMaterialShapeDrawable.Bind(MaterialDrawable.HeightProperty, nameof(Height),
+        mMaterialShapeDrawable.Bind(Drawable.HeightProperty, nameof(Height),
             source: mCanvasView, mode: BindingMode.OneWay);
-        mMaterialShapeDrawable.Bind(MaterialShapeDrawable.BackgroundColorProperty, nameof(BackgroundColor),
+        mMaterialShapeDrawable.Bind(ShapeDrawable.BackgroundColorProperty, nameof(BackgroundColor),
             source: this, mode: BindingMode.OneWay);
-        mMaterialShapeDrawable.Bind(MaterialShapeDrawable.BorderWidthProperty,
+        mMaterialShapeDrawable.Bind(ShapeDrawable.BorderWidthProperty,
             nameof(BorderWidth),
             source: this, mode: BindingMode.OneWay);
-        mMaterialShapeDrawable.Bind(MaterialShapeDrawable.CornerRadiusProperty,
+        mMaterialShapeDrawable.Bind(ShapeDrawable.CornerRadiusProperty,
             nameof(CornerRadius),
+            source: this, mode: BindingMode.OneWay);
+        mMaterialShapeDrawable.Bind(ShapeDrawable.ShapeTypeProperty,
+            nameof(ShapeType),
+            source: this, mode: BindingMode.OneWay);
+        mMaterialShapeDrawable.Bind(ShapeDrawable.IsFilledProperty,
+            nameof(IsFilled),
             source: this, mode: BindingMode.OneWay);
     }
 
@@ -47,6 +56,18 @@ public class MaterialRoundedView : MaterialView, IBorder
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
         set => SetValue(CornerRadiusProperty, value);
+    }
+
+    public ShapeType ShapeType
+    {
+        get => (ShapeType)GetValue(ShapeTypeProperty);
+        set => SetValue(ShapeTypeProperty, value);
+    }
+
+    public bool IsFilled
+    {
+        get => (bool)GetValue(IsFilledProperty);
+        set => SetValue(IsFilledProperty, value);
     }
 
     public bool HasBorder => BorderWidth > 0 && !Equals(BorderColor, Colors.Transparent);

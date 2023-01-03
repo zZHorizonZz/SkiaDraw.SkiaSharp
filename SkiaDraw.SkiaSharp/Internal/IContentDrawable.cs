@@ -3,7 +3,7 @@ using Microsoft.Maui.Graphics;
 
 namespace Maui.Material.You.Components.Internal;
 
-public interface IMaterialContentDrawable : IDrawable
+public interface IContentDrawable : IDrawable
 {
     TDrawable AddDrawable<TDrawable>(TDrawable drawable) where TDrawable : IDrawable;
 

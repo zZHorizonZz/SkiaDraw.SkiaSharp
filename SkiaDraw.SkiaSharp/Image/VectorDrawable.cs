@@ -14,7 +14,7 @@ using IImage = Maui.Material.You.Components.Models.IImage;
 
 namespace Maui.Material.You.Components.Image;
 
-public class VectorDrawable : MaterialDrawable, IImage
+public class VectorDrawable : Drawable, IImage
 {
     public static readonly BindableProperty ColorProperty = ImageElement.ColorProperty;
     public static readonly BindableProperty SourceProperty = ImageElement.SourceProperty;
@@ -70,7 +70,8 @@ public class VectorDrawable : MaterialDrawable, IImage
 
     private void LoadSource(string path)
     {
-        var source = SourceManager.Instance?.GetSource(path);
+        var name = path.Split('.').First();
+        var source = SourceManager.Instance?.GetSource(name);
         if (source == null) throw new Exception($"Source ({path}) of the {nameof(VectorDrawable)} can not be found.");
 
         if (source is not SvgSource svgSource) return;

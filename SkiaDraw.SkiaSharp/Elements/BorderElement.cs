@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
+﻿using Maui.Material.You.Components.Shape;
 using IBorder = Maui.Material.You.Components.Models.IBorder;
 
 namespace Maui.Material.You.Components.Elements;
@@ -33,6 +31,20 @@ public class BorderElement
         typeof(CornerRadius),
         typeof(BorderElement),
         new CornerRadius(4.0),
+        propertyChanged: OnBorderChanged);
+
+    public static readonly BindableProperty ShapeTypeProperty = BindableProperty.Create(
+        nameof(IBorder.ShapeType),
+        typeof(ShapeType),
+        typeof(BorderElement),
+        ShapeType.Rectangle,
+        propertyChanged: OnBorderChanged);
+
+    public static readonly BindableProperty IsFilledProperty = BindableProperty.Create(
+        nameof(IBorder.IsFilled),
+        typeof(bool),
+        typeof(BorderElement),
+        true,
         propertyChanged: OnBorderChanged);
 
     public static void OnBorderChanged(BindableObject bindable, object oldValue, object newValue)

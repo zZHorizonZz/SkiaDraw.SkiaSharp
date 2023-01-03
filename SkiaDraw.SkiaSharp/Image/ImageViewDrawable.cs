@@ -4,6 +4,7 @@ using Maui.Material.You.Components.Models;
 using Maui.Material.You.Components.View;
 using Maui.Material.You.Extension;
 using Maui.Material.You.Source;
+using Maui.Material.You.Source.Image;
 using Maui.Material.You.Utils;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
@@ -13,7 +14,7 @@ using ImageSource = Maui.Material.You.Source.Image.ImageSource;
 
 namespace Maui.Material.You.Components.Image;
 
-public class ImageViewDrawable : MaterialDrawable, IImage, IBitmapImage
+public class ImageViewDrawable : Drawable, IImage, IBitmapImage
 {
     public static readonly BindableProperty ColorProperty = ImageElement.ColorProperty;
     public static readonly BindableProperty SourceProperty = ImageElement.SourceProperty;
@@ -97,8 +98,10 @@ public class ImageViewDrawable : MaterialDrawable, IImage, IBitmapImage
 
         canvas.Save();
 
-        if (CornerRadius is { })
-            canvas.ClipPath(GetBounds().ToRoundedRect(CornerRadius.Value, context.Scale));
+        /* if (CornerRadius is { })
+             canvas.ClipPath(GetBounds().CreateRoundedRect(CornerRadius.Value, context.Scale));*/
+
+        //TODO: Add support for shapetype
 
         var paint = new SKPaint();
 
@@ -123,12 +126,22 @@ public class ImageViewDrawable : MaterialDrawable, IImage, IBitmapImage
                 Color != null ? paint : null);
         }
 
+        if (source is SvgSource svg)
+        {
+            var picture = svg.Svg.Picture;
+            canvas.Translate(GetX() * context.Scale, GetY() * context.Scale);
+            var matrix = SKMatrix.CreateScale(Convert.ToSingle(Width / picture.CullRect.Width) * context.Scale,
+                Convert.ToSingle(Height / picture.CullRect.Height) * context.Scale);
+            canvas.DrawPicture(picture, ref matrix, paint);
+        }
+
         canvas.Restore();
     }
 
     private void LoadSource(string path)
     {
-        var source = SourceManager.Instance?.GetSource(path);
+        var name = path.Split('.').First();
+        var source = SourceManager.Instance?.GetSource(name);
         switch (source)
         {
             case null:

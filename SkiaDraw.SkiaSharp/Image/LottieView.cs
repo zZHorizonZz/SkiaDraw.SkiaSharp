@@ -9,7 +9,7 @@ using Microsoft.Maui.Controls;
 
 namespace Maui.Material.You.Components.Image;
 
-public class MaterialLottieView : MaterialView, ILottieAnimator
+public class LottieView : DrawView, ILottieAnimator
 {
     public static readonly BindableProperty SourceProperty = LottieAnimatorElement.SourceProperty;
     public static readonly BindableProperty AnimationProgressProperty = LottieAnimatorElement.AnimationProgressProperty;
@@ -18,7 +18,7 @@ public class MaterialLottieView : MaterialView, ILottieAnimator
 
     internal LottieViewDrawable mLottieDrawable;
 
-    public MaterialLottieView()
+    public LottieView()
     {
         mLottieDrawable = AddDrawable(new LottieViewDrawable());
 
@@ -30,8 +30,8 @@ public class MaterialLottieView : MaterialView, ILottieAnimator
         mLottieDrawable.SetBinding(LottieViewDrawable.RepeatCountProperty,
             new Binding(nameof(RepeatCount), source: this));
         mLottieDrawable.SetBinding(LottieViewDrawable.RestartProperty, new Binding(nameof(Restart), source: this));
-        mLottieDrawable.SetBinding(MaterialDrawable.WidthProperty, new Binding(nameof(Width), source: this));
-        mLottieDrawable.SetBinding(MaterialDrawable.HeightProperty, new Binding(nameof(Height), source: this));
+        mLottieDrawable.SetBinding(Drawable.WidthProperty, new Binding(nameof(Width), source: this));
+        mLottieDrawable.SetBinding(Drawable.HeightProperty, new Binding(nameof(Height), source: this));
     }
 
     public string Source

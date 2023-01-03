@@ -10,7 +10,7 @@ using IImage = Maui.Material.You.Components.Models.IImage;
 
 namespace Maui.Material.You.Components.Image;
 
-public class MaterialImageView : MaterialView, IImage, IBitmapImage
+public class ImageView : DrawView, IImage, IBitmapImage
 {
     public static readonly BindableProperty ColorProperty = ImageElement.ColorProperty;
     public static readonly BindableProperty SourceProperty = ImageElement.SourceProperty;
@@ -26,7 +26,7 @@ public class MaterialImageView : MaterialView, IImage, IBitmapImage
 
     internal ImageViewDrawable mImageView;
 
-    public MaterialImageView()
+    public ImageView()
     {
         mImageView = AddDrawable(new ImageViewDrawable());
 

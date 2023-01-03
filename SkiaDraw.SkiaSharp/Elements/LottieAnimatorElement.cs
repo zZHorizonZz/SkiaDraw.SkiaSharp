@@ -1,5 +1,4 @@
 ﻿using Maui.Material.You.Components.Models;
-using Microsoft.Maui.Controls;
 
 namespace Maui.Material.You.Components.Elements;
 
@@ -9,14 +8,12 @@ public class LottieAnimatorElement
         nameof(ILottieAnimator.Source),
         typeof(string),
         typeof(LottieAnimatorElement),
-        null,
         propertyChanged: OnAnimationSourceChanged);
 
     public static readonly BindableProperty AnimationProgressProperty = BindableProperty.Create(
         nameof(ILottieAnimator.AnimationProgress),
         typeof(double),
         typeof(LottieAnimatorElement),
-        null,
         propertyChanged: OnAnimationProgressChanged);
 
     public static readonly BindableProperty RepeatCountProperty = BindableProperty.Create(

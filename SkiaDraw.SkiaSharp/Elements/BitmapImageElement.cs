@@ -1,7 +1,5 @@
 ﻿using Maui.Material.You.Components.Image;
 using Maui.Material.You.Components.Models;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
 
 namespace Maui.Material.You.Components.Elements;
 

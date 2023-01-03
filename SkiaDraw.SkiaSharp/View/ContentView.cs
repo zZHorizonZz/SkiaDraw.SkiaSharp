@@ -2,6 +2,6 @@
 
 namespace Maui.Material.You.Components.View;
 
-public class MaterialContentView : StackLayout
+public class ContentView : StackLayout
 {
 }
